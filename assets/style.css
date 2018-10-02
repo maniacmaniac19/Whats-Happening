@@ -1,0 +1,16 @@
+.filter{
+    z-index: 110;
+    height: 500px;
+    margin: 15px;
+    background-color: aquamarine;
+    position: absolute;
+    width: 100%;
+}
+
+.hidden{
+    display: none;
+}
+
+body{
+    position: relative;
+}
