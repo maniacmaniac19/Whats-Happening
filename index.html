@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">egit 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WhatsHappening</title>
 </head>
+
 <body>
     </head>
 
-    <body>
-        
-        <h1>What's Happening?</h1>
+    <body background=".img"></body>
 
-        
-        <button type="button">NOW!</button>
-        <button type="button">LATER</button>
-    
-        
-        
-        <div id="mytopNav" class="topnav">
-            <a id="cost">Cost</a>
-            <a id="free">Free</a>
-            <a id="loc">Location</a>
-            <a id="cat">Categories</a>
+    <h1>What's Happening?</h1>
 
+    <button type="button">NOW!</button><br /> 
+    <p id="or">OR</p>
+    <button type="button">LATER</button><br /> 
+
+
+
+    <div id="mytopNav" class="topnav filter hidden">
+        <button type="button">Refresh Results</button><br /> 
+        <a id="cost">Cost</a><br /> 
+        <div class="costslider">
+                <input type="range" min="0" max="100" value="$" class="slider" id="costrange">
+              </div>
+        <a id="free">Free</a><br /> 
+        <form id="date">
+        <label>Date</label>
+        <input type="date"/><br>
+        <input type="submit"/>
+        </form>
+        <a id="loc">Location</a><br /> 
+
+        <a id="cat">Categories</a><br /> 
+    </div>
+    <!--The user uses navigation bar to filter for events-->
+
+        <div class="eventinfo">
             <div class="content"></div>
-    
-        
+            <div class="map"></div>
+            <div class="lyft"></div>
+            <div class="eventimage"></div>
+        </div>
+        <div class="footer"></div>
+        WE KNOW WHAT'S HAPPENING.
+    </div>
 
-    
+    </div>
 </body>
+
 </html>
