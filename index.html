@@ -14,33 +14,55 @@
 <body>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Search</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        blah blah blah
-                        <div id="mytopNav" class="topnav filter hidden">
-                            <button type="button">Refresh Results</button><br />
-                            <a id="cost">Cost</a><br />
-                            <div class="costslider">
-                                <input type="range" min="0" max="100" value="$" class="slider" id="costrange">
-                            </div>
-                            <a id="free">Free</a><br />
-                            <form id="date">
-                                <label>Date</label>
-                                <input type="date" /><br>
-                                <input type="submit" />
-                            </form>
-                            <a id="loc">Location</a><br />
-                            <a id="cat">Categories</a><br />
+
+                        <!--The user will be able to find events happening daily, weekly, the following week, and all events by clicking on buttons.-->
+                        <h4>DATE</h4>
+                        <button type="button" id="todayBtn">TODAY</button>
+                        <button type="button" id="thisweekBtn">THIS WEEK</button>
+                        <button type="button" id="nextweekBtn">NEXT WEEK</button>
+                        <button type="button" id="allBtn">ALL</button>
+
+
+
+
+                        <!--The user will be able to find events according to distance(0-50miles) by using a distance slider-->
+                        <h4>DISTANCE</h4>
+                        <div id="distanceSlider">
+                            <input type="range" min="0" max="100" value="$" class="slider" id="distRange">
                         </div>
+
+
+                        <!---The user will be able to narrow down event selections by price points and choose from strictly free events-->
+                        <h4>COST</h4>
+                        <div id="costSlider">
+                            <input type="range" min="0" max="100" value=[0,100] class="slider" id="costRange"></br>
+                            <input type="checkbox" name="free" value="free"> FREE99 </br>
+                        </div> </br>
+
+
+
+                        <!---The user will be able to choose from various categories to narrow down event selections-->
+                        <h4>CATERGORIES</h4>
+                        <div id="categories">
+                            <input type="checkbox" name="category1" value="category1"> CATEGORY 1 </br>
+                            <input type="checkbox" name="category2" value="category2"> CATEGORY 2 </br>
+                            <input type="checkbox" name="category3" value="category3"> CATEGORY 3</br>
+                            <input type="checkbox" name="category4" value="category4"> CATEGORY 4 </br>
+
+                        </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -56,8 +78,8 @@
         <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
         <!-- Button shows in smaller screens but not in larger screens -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Find an Event
-              </button>
+            Find an Event
+        </button>
     </nav>
     <div class="firstView">
         <h1 class="pageTitle">What's Happening?</h1>
@@ -67,27 +89,35 @@
         <!-- <button class = "showFilter" type="button">LATER</button><br />  -->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Later
+<<<<<<< HEAD
           </button>
       </div>
+=======
+        </button>
+>>>>>>> master
     </div>
-    <!--The user uses navigation bar to filter for events-->
-
-    <div class="eventinfo">
+   
+  <!--The user will see a display of the event information along with a map-->
+    <div class="eventInfo">
         <div class="content"></div>
         <div class="map"></div>
-        <div class="lyft"></div>
-        <div class="eventimage"></div>
+        <div class="eventImage"></div>
     </div>
+    <!--The footer-->
     <div class="footer"></div>
     WE KNOW WHAT'S HAPPENING.
     </div>
 
     </div>
     <!-- Basic jQuery library -->
+<<<<<<< HEAD
     <script src=https://code.jquery.com/jquery-3.3.1.min.js></script>
     <!-- Moment js -->
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <!-- Bootstrap JS -->
+=======
+    <script src=https://code.jquery.com/jquery-3.3.1.min.js> </script> <!-- Bootstrap JS -->
+>>>>>>> master
     <script src="./assets/js/bootstrap.min.js"></script>
     <!-- bootstrap functionality -->
     <script src="./assets/jared.js"></script>

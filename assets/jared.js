@@ -20,3 +20,12 @@ let showMenu = function(event){
 
 //Show navigation bar and filter button when you click on the Now button in initial view.
 $(".nowButton").on("click",showMenu)
+
+// // $(function() {
+// //    $( "#slider-range-s1" ).slider({
+// //        range: true,
+// //        min: 0,
+// //        max: 500,
+// //        value: [ 0, 500 ]
+// //    });
+// });
