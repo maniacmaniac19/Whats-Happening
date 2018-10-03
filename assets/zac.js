@@ -62,7 +62,11 @@ function grabEvents() {
         for (let i = 0; i < res.events.event.length; i++) {
             // console.log(res.events.event[i].image);
             if (res.events.event[i].image!==null) {
-                eventsDisp.append(`<div id="wrapper event${i}">${i} ${res.events.event[i].title} Starting: ${res.events.event[i].start_time} <img src="${res.events.event[i].image.thumb.url}"></div><br>`);
+                eventsDisp.append(`<div id="wrapper event${i}">
+                ${i} ${res.events.event[i].title} 
+                Starting: ${res.events.event[i].start_time} 
+                <img src="${res.events.event[i].image.thumb.url}">
+                </div><br>`);
             }else{
                 eventsDisp.append(`<div id="wrapper">${res.events.event[i].title} Starting: ${res.events.event[i].start_time} No Image</div><br>`);
             }
