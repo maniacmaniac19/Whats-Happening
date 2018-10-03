@@ -1,6 +1,6 @@
 var x = document.getElementById("demo");
 const eventsDisp = $("#content");
-
+let myLat,myLong;
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -11,8 +11,11 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-        "<br>Longitude: " + position.coords.longitude;
+    myLat=position.coords.latitude;
+    myLong=position.coords.longitude;
+    // console.log(myLat);
+    x.innerHTML = "Latitude: " + myLat +
+        "<br>Longitude: " + myLong;
 }
 
 function showError(error) {
@@ -40,12 +43,14 @@ function grabEvents() {
 
         //   q: "music",
 
-        where: "32.929164799999995,-97.01022979999999",
+        // where: "32.929164799999995,-97.01022979999999",
+        where:`${myLat},${myLong}`,
         "date": "Future",
         page_number: 1,
         page_size: 15,
         sort_order: "date",
-        within: "25 miles"
+        within: "25 miles",
+        include:'categories,price,popularity'
 
     };
 
@@ -57,7 +62,7 @@ function grabEvents() {
         for (let i = 0; i < res.events.event.length; i++) {
             // console.log(res.events.event[i].image);
             if (res.events.event[i].image!==null) {
-                eventsDisp.append(`<div id="wrapper event${i}">${res.events.event[i].title} Starting: ${res.events.event[i].start_time} <img src="${res.events.event[i].image.thumb.url}"></div><br>`);
+                eventsDisp.append(`<div id="wrapper event${i}">${i} ${res.events.event[i].title} Starting: ${res.events.event[i].start_time} <img src="${res.events.event[i].image.thumb.url}"></div><br>`);
             }else{
                 eventsDisp.append(`<div id="wrapper">${res.events.event[i].title} Starting: ${res.events.event[i].start_time} No Image</div><br>`);
             }
