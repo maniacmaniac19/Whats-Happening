@@ -29,6 +29,17 @@ body{
     color: floralwhite;
 }
 
-nav{
+/* nav{
     text-align: center;
+} */
+
+h1{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.firstBtns{
+    width: 75%;
+    margin:auto;
+    
 }
