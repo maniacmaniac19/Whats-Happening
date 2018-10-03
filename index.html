@@ -5,51 +5,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WhatsHappening</title>
+    <title>What's Happening?</title>
+    <link href="https://fonts.googleapis.com/css?family=Rock+Salt|Share" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
-    </head>
 
-    <body background=".img"></body>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Search</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        blah blah blah
+                        <div id="mytopNav" class="topnav filter hidden">
+                            <button type="button">Refresh Results</button><br />
+                            <a id="cost">Cost</a><br />
+                            <div class="costslider">
+                                <input type="range" min="0" max="100" value="$" class="slider" id="costrange">
+                            </div>
+                            <a id="free">Free</a><br />
+                            <form id="date">
+                                <label>Date</label>
+                                <input type="date" /><br>
+                                <input type="submit" />
+                            </form>
+                            <a id="loc">Location</a><br />
+                            <a id="cat">Categories</a><br />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Find an Event.</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <h1>What's Happening?</h1>
+    <!-- Nav div -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light hidden">
+        <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
+        <!-- Button shows in smaller screens but not in larger screens -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Find an Event
+              </button>
+    </nav>
+    <div class="firstView">
+        <h1 class="pageTitle">What's Happening?</h1>
 
-    <button type="button">NOW!</button><br /> 
-    <p id="or">OR</p>
-    <button type="button">LATER</button><br /> 
-
-
-
-    <div id="mytopNav" class="topnav filter hidden">
-        <button type="button">Refresh Results</button><br /> 
-        <a id="cost">Cost</a><br /> 
-        <div class="costslider">
-                <input type="range" min="0" max="100" value="$" class="slider" id="costrange">
-              </div>
-        <a id="free">Free</a><br /> 
-        <form id="date">
-        <label>Date</label>
-        <input type="date"/><br>
-        <input type="submit"/>
-        </form>
-        <a id="loc">Location</a><br /> 
-
-        <a id="cat">Categories</a><br /> 
+        <button class="nowButton btn btn-success">NOW!</button><br />
+        <p id="or">OR</p>
+        <!-- <button class = "showFilter" type="button">LATER</button><br />  -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Later
+          </button>
     </div>
     <!--The user uses navigation bar to filter for events-->
 
-        <div class="eventinfo">
-            <div class="content"></div>
-            <div class="map"></div>
-            <div class="lyft"></div>
-            <div class="eventimage"></div>
-        </div>
-        <div class="footer"></div>
-        WE KNOW WHAT'S HAPPENING.
+    <div class="eventinfo">
+        <div class="content"></div>
+        <div class="map"></div>
+        <div class="lyft"></div>
+        <div class="eventimage"></div>
+    </div>
+    <div class="footer"></div>
+    WE KNOW WHAT'S HAPPENING.
     </div>
 
     </div>
+    <!-- Basic jQuery library -->
+    <script src=https://code.jquery.com/jquery-3.3.1.min.js></script>
+    <!-- Bootstrap JS -->
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <!-- bootstrap functionality -->
+    <script src="./assets/jared.js"></script>
 </body>
 
 </html>
