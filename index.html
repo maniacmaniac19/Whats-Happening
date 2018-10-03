@@ -37,19 +37,25 @@
 
 
 
-                        <!--The user will be able to find events according to distance(0-50miles) by using a distance slider-->
+                        <!-- //!--The user will be able to find events according to distance(0-50miles) by using a distance slider-->
                         <h4>DISTANCE</h4>
                         <div id="distanceSlider">
-                            <input type="range" min="0" max="100" value="$" class="slider" id="distRange">
-                        </div>
-
-
+                            <label for="points">Points:</label>
+                            <input type="range" name="points" id="points" value="50" min="0" max="100" data-show-value="true">
+                        </div> 
+                        
                         <!---The user will be able to narrow down event selections by price points and choose from strictly free events-->
+                        
                         <h4>COST</h4>
                         <div id="costSlider">
                             <input type="range" min="0" max="100" value=[0,100] class="slider" id="costRange"></br>
                             <input type="checkbox" name="free" value="free"> FREE99 </br>
                         </div> </br>
+
+                        <h4>LOCATION</h4>
+                        <input type="checkbox" name="location" value="location"> Use My Location </br>
+                        Zip Code/City <input type="text" name="city"><br>
+
 
 
 
@@ -91,12 +97,14 @@
             Later
         </button>
     </div>
-   
-  <!--The user will see a display of the event information along with a map-->
-    <div class="eventInfo">
-        <div class="content"></div>
-        <div class="map"></div>
-        <div class="eventImage"></div>
+
+    <!--The user will see a display of the event information along with a map-->
+    <div id="eventDump">
+        <div class="eventInfo[i]">
+            <div class="content[i]"></div>
+            <div class="map[i]"></div>
+            <div class="eventImage[i]"></div>
+        </div>
     </div>
     <!--The footer-->
     <div class="footer"></div>
