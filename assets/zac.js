@@ -1,19 +1,21 @@
 var x = document.getElementById("demo");
 const eventsDisp = $("#content");
-let myLat,myLong;
+let myLat=35.6895;
+let myLong=139.6917;
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
+        navigator.geolocation.getCurrentPosition(savePosition, showError);
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
-function showPosition(position) {
+function savePosition(position) {
     myLat=position.coords.latitude;
     myLong=position.coords.longitude;
-    // console.log(myLat);
+    // console.log(myLat,myLong);
+    grabEvents();
     x.innerHTML = "Latitude: " + myLat +
         "<br>Longitude: " + myLong;
 }
@@ -50,7 +52,7 @@ function grabEvents() {
         page_size: 15,
         sort_order: "date",
         within: "25 miles",
-        include:'categories,price,popularity'
+        include:'categories,subcategories,price,popularity,links'
 
     };
 
@@ -74,3 +76,5 @@ function grabEvents() {
     });
 }
 
+$("#locationBtn").on('click',getLocation);
+$("#pullBtn").on('click',grabEvents)
