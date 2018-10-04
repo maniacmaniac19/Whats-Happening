@@ -93,10 +93,13 @@
     </div>
    
   <!--The user will see a display of the event information along with a map-->
-    <div class="eventInfo">
-        <div class="content"></div>
-        <div class="map"></div>
-        <div class="eventImage"></div>
+    <div id="eventDump">
+        <!-- Example layout for the content
+        <div class="eventInfo[i]">
+            <div class="content[i]"></div>
+            <div class="map[i]"></div>
+            <div class="eventImage[i]"></div>
+        </div> -->
     </div>
     <!--The footer-->
     <div class="footer"></div>
@@ -105,7 +108,10 @@
 
     </div>
     <!-- Basic jQuery library -->
-    <script src=https://code.jquery.com/jquery-3.3.1.min.js> </script> <!-- Bootstrap JS -->
+    <script src=https://code.jquery.com/jquery-3.3.1.min.js> </script> 
+    <!-- Eventful API Link -->
+    <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
+    <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
     <!-- bootstrap functionality -->
     <!-- <script src="./assets/jared.js"></script> -->

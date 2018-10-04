@@ -1,3 +1,15 @@
+body{
+    position: relative;
+    color: white;
+    background-color: black;
+    font-family: 'Share', cursive;
+    background-image: url(./images/nightlife.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+nav{
+    text-align: center;
+}
 .filter{
     z-index: 110;
     height: 500px;
@@ -15,20 +27,13 @@
     display: block;
 }
 
-body{
-    position: relative;
-    background-color: #B722E8;
-    font-family: 'Share', cursive;
-    background-image: url(./images/nightlife.png);
-    background-repeat: no-repeat;
-    background-size: auto;
-}
+
 
 .pageTitle{
     font-family: 'Rock Salt', cursive;
     color: floralwhite;
 }
 
-nav{
-    text-align: center;
+.modal-body{
+    color:black;
 }

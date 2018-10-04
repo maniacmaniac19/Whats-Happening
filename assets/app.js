@@ -1,18 +1,40 @@
-let myLat,myLong;
+// Where I Dump
+const myDump=$("#eventDump");
 
+//default parameters
+let myParam = {
+    app_key: "LT5Q2szWsMzXGZpj",
+    //   q: "music",
+    // where: "32.929164799999995,-97.01022979999999",
+    where:``,
+    date: "Future",
+    page_number: 1,
+    page_size: 15,
+    sort_order: "date",
+    within: "25 miles",
+    include:'categories,subcategories,price,popularity,links'
+};
+
+// Update parameters based on user input
+// const updateParam=function(){
+//     myParam.date=;
+// }
+
+// Asks user for location access
 const getLocation=function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(savePosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
+    } 
+    // else {
+    //     x.innerHTML = "Geolocation is not supported by this browser.";
+    // }
 }
+// Updates user location data, calls the showMenu and makes initial API call
 const savePosition=function(position){
-    myLat=position.coords.latitude;
-    myLong=position.coords.longitude;
-    console.log(myLat,myLong);
-    // grabEvents();
+    myParam.where=`${position.coords.latitude},${position.coords.longitude}`
+    // console.log(myParam.where);
     showMenu();
+    grabEvents(myParam);
 }
 
 //Jared's Code
@@ -40,4 +62,44 @@ const savePosition=function(position){
     // $(".nowButton").on("click",showMenu);
 //End Jared's code
 
+
+function grabEvents(parameters) {
+    // console.log(myParam);
+    // This is how they want you calling the API
+    EVDB.API.call("/events/search", parameters, function (res) {
+        console.log(res);
+        // console.log(res.events.event[0]);
+        // Does something for each event in list
+        for (let i = 0; i < res.events.event.length; i++) {
+            // console.log(res.events.event[i].image);
+            //Checks to see if the event has an image
+            if (res.events.event[i].image!==null) {
+                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2></div>`);
+            }
+            else{                
+                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2></div>`);
+            }
+        }
+    });
+}
+
+// Asks for geolocation permission, then runs the now section
 $(".nowButton").on('click',getLocation);
+
+//Pressing these changes the date parameter
+$("#todayBtn").on('click',function(){
+    myParam.date="Today";
+    // console.log(myParam.date);
+});
+$("#thisweekBtn").on('click',function(){
+    myParam.date="This Week";
+    // console.log(myParam.date);
+});
+$("#nextweekBtn").on('click',function(){
+    myParam.date="Next Week";
+    // console.log(myParam.date);
+});
+$("#allBtn").on('click',function(){
+    myParam.date="Future";
+    // console.log(myParam.date);
+});
