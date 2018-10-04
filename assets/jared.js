@@ -14,18 +14,10 @@ let showMenu = function(event){
     event.preventDefault();
     //unhide navbar
     $('.navbar').toggleClass('hidden');
+    $('.loadMore').toggleClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
 
 //Show navigation bar and filter button when you click on the Now button in initial view.
 $(".nowButton").on("click",showMenu)
-
-// // $(function() {
-// //    $( "#slider-range-s1" ).slider({
-// //        range: true,
-// //        min: 0,
-// //        max: 500,
-// //        value: [ 0, 500 ]
-// //    });
-// });
