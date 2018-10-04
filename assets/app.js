@@ -12,7 +12,8 @@ let myParam = {
     page_size: 15,
     sort_order: "date",
     within: "25 miles",
-    include:'categories,subcategories,price,popularity,links'
+    include:'categories,subcategories,price,popularity,links',
+    mature:"all"
 };
 
 // Update parameters based on user input
@@ -74,10 +75,10 @@ function grabEvents(parameters) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
             if (res.events.event[i].image!==null) {
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2></div>`);
+                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
             }
             else{                
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2></div>`);
+                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
             }
         }
     });
