@@ -126,22 +126,13 @@ const savePosition=function(position){
 }
 
 //Jared's Code
-let showFilter = function (event) {
-    event.preventDefault();
-    console.log("yes")
-    $('.filter').toggleClass('hidden')
-
-}
-
-
-$(".showFilter").on("click", showFilter);
-
 //bring the menu back based upon clicking now
 let showMenu = function (event) {
     //prevent the default event
     // event.preventDefault();
     //unhide navbar
     $('.navbar').removeClass('hidden');
+    $('.loadMore').removeClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -201,4 +192,6 @@ $("#allBtn").on('click',function(){
     // console.log(myParam.date);
 });
 $("#findEventBtn").on('click',updateParam);
+
+// Runs automatically to gather available categories
 getCategories();
