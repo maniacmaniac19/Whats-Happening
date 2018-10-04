@@ -12,9 +12,9 @@
 </head>
 
 <body>
-
+<div class="container-fluid">
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -58,6 +58,12 @@
 
 
 
+                        <div class="slidecontainer">
+                            <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                            <p>Value: <span id="demo"></span></p>
+                          </div>
+
+
 
                         <!---The user will be able to choose from various categories to narrow down event selections-->
                         <h4>CATERGORIES</h4>
@@ -77,43 +83,50 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Nav div -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light hidden">
+    <nav class="navbar navbar-light bg-light hidden">
         <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
-        <!-- Button shows in smaller screens but not in larger screens -->
+        
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Find an Event
         </button>
     </nav>
     <div class="firstView">
         <h1 class="pageTitle">What's Happening?</h1>
-
-        <button class="nowButton btn btn-success">NOW!</button><br />
-        <p id="or">OR</p>
-        <!-- <button class = "showFilter" type="button">LATER</button><br />  -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Later
-        </button>
-    </div>
-
-    <!--The user will see a display of the event information along with a map-->
-    <div id="eventDump">
-        <div class="eventInfo[i]">
-            <div class="content[i]"></div>
-            <div class="map[i]"></div>
-            <div class="eventImage[i]"></div>
+      <div class="row">
+      <div class = "firstBtns col-12">
+        <button class="nowButton btn btn-xlarge btn-success">NOW!</button><br />
+        <div class="col-12">
+        <p id="or" class="col-12">OR</p>
         </div>
+        <!-- <button class = "showFilter" type="button">LATER</button><br />  -->
+        <button type="button" class=" btn btn-xlarge btn-primary " data-toggle="modal" data-target="#exampleModal">
+            Later
+          </button>
+      </div>
+    </div>
+  </div>
+  <!--The user will see a display of the event information along with a map-->
+    <div class="eventDump">
+    </div> 
+    <div class="row">
+      <div class="col-12">
+    <button class = "btn loadMore hidden align-center">Load More...</button>
     </div>
     <!--The footer-->
-    <div class="footer"></div>
-    WE KNOW WHAT'S HAPPENING.
-    </div>
+    <div class=" row navbar fixed-bottom text-center">
+   <p id= "tagLine" class = "col-12"> WE KNOW WHAT'S HAPPENING.</p>
+    </div></div>
+  </div>
 
-    </div>
+   
     <!-- Basic jQuery library -->
-    <script src=https://code.jquery.com/jquery-3.3.1.min.js> </script> <!-- Bootstrap JS -->
+    <script src=https://code.jquery.com/jquery-3.3.1.min.js></script>
+    <!-- Moment js -->
+    <script src="https://momentjs.com/downloads/moment.js"></script>
+    <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
     <!-- bootstrap functionality -->
     <script src="./assets/jared.js"></script>

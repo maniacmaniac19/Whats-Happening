@@ -14,6 +14,7 @@ let showMenu = function(event){
     event.preventDefault();
     //unhide navbar
     $('.navbar').toggleClass('hidden');
+    $('.loadMore').toggleClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -21,11 +22,11 @@ let showMenu = function(event){
 //Show navigation bar and filter button when you click on the Now button in initial view.
 $(".nowButton").on("click",showMenu)
 
-// // $(function() {
-// //    $( "#slider-range-s1" ).slider({
-// //        range: true,
-// //        min: 0,
-// //        max: 500,
-// //        value: [ 0, 500 ]
-// //    });
-// });
+
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
