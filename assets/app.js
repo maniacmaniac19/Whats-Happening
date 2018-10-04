@@ -18,7 +18,7 @@ let myParam = {
 
 // Update parameters based on user input
 // const updateParam=function(){
-//     myParam.date=;
+    
 // }
 
 // Asks user for location access
