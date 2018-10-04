@@ -1,52 +1,61 @@
 body{
-    position: relative;
-    color: white;
-    background-color: black;
     font-family: 'Share', cursive;
     background-image: url(./images/nightlife.png);
-    background-repeat: no-repeat;
-    background-size: auto;
 }
-nav{
+
+datalist{
+    display: block;
+}
+
+h1{
     text-align: center;
-}
-.filter{
-    z-index: 110;
-    height: 500px;
-    margin: 15px;
-    background-color: aquamarine;
-    position: absolute;
-    width: 100%;
+    margin-top: 15px;
 }
 
 .hidden{
     display: none;
 }
 
-.show{
-    display: block;
-}
-
-
-
 .pageTitle{
     font-family: 'Rock Salt', cursive;
     color: floralwhite;
 }
 
+
 .modal-body{
     color:black;
 }
+
+
+.firstBtns{
+    margin-top: 20px;
+    text-align: center;
+    
+    
+}
+
+.btn-xlarge{
+    padding: 20px 30px;
+}
+
+.loadMore{
+    text-align: center;
+}
+
 .slider-wrapper {
     display: inline-block;
     width: 20px;
     height: 150px;
     padding: 0;
-  }
+}
 
-  datalist{
-      display: block;
+#tagLine{
+    text-align: center;
+    color: floralwhite;
+}
 
-  }
-  
+#or{
+    color: floralwhite;
+    margin-top: 8px;
+}
 
