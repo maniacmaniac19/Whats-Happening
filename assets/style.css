@@ -34,6 +34,22 @@ nav{
     color: floralwhite;
 }
 
+<<<<<<< HEAD
 .modal-body{
     color:black;
 }
+=======
+.slider-wrapper {
+    display: inline-block;
+    width: 20px;
+    height: 150px;
+    padding: 0;
+  }
+
+  datalist{
+      display: block;
+
+  }
+  
+
+>>>>>>> master
