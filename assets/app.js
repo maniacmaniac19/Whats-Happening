@@ -41,7 +41,7 @@ const savePosition=function(position){
 //Jared's Code
 let showFilter = function (event) {
     event.preventDefault();
-    console.log("yes")
+    // console.log("yes")
     $('.filter').toggleClass('hidden')
 
 }
@@ -55,6 +55,7 @@ let showMenu = function (event) {
     // event.preventDefault();
     //unhide navbar
     $('.navbar').toggleClass('hidden');
+    $('.loadMore').toggleClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -84,10 +85,10 @@ function grabEvents(parameters) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
             if (res.events.event[i].image!==null) {
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
+                myDump.append(`<div class="event-card event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
             }
             else{                
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
+                myDump.append(`<div class=" event-card event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
             }
         }
     });
