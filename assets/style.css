@@ -14,6 +14,7 @@ body{
     color: floralwhite;
 }
 
+<<<<<<< HEAD
 h1{
     text-align: center;
     margin-top: 15px;
@@ -43,3 +44,18 @@ h1{
 .loadMore{
     text-align: center;
 }
+=======
+.slider-wrapper {
+    display: inline-block;
+    width: 20px;
+    height: 150px;
+    padding: 0;
+  }
+
+  datalist{
+      display: block;
+
+  }
+  
+
+>>>>>>> master
