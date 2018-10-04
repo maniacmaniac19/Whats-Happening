@@ -29,6 +29,16 @@ body{
     color: floralwhite;
 }
 
-nav{
-    text-align: center;
-}
+.slider-wrapper {
+    display: inline-block;
+    width: 20px;
+    height: 150px;
+    padding: 0;
+  }
+
+  datalist{
+      display: block;
+
+  }
+  
+
