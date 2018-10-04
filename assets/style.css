@@ -1,6 +1,8 @@
 body{
     font-family: 'Share', cursive;
     background-image: url(./images/nightlife.png);
+    background-attachment: fixed;
+
 }
 
 datalist{

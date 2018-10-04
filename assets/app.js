@@ -1,4 +1,4 @@
-// Where I Dump
+const searchLocation=$("#searchArea");
 const myDump=$("#eventDump");
 
 //default parameters
@@ -17,9 +17,24 @@ let myParam = {
 };
 
 // Update parameters based on user input
-// const updateParam=function(){
-    
-// }
+const updateParam=function(){
+    if(searchLocation.val()){
+        // console.log("valid");
+        document.getElementById("searchArea").style.backgroundColor="white";
+        document.getElementById("searchArea").removeAttribute("placeholder");
+        myParam.where=searchLocation.val().trim();
+        // console.log(myParam.where);
+        showMenu();
+        $("#exampleModal").modal("hide");
+        myDump.empty();
+        grabEvents(myParam);
+
+    }else{
+        // console.log("invalid");
+        document.getElementById("searchArea").style.backgroundColor="yellow";
+        document.getElementById("searchArea").setAttribute("placeholder","Enter a city or zipcode.");
+    }
+}
 
 // Asks user for location access
 const getLocation=function() {
@@ -54,7 +69,7 @@ let showMenu = function (event) {
     //prevent the default event
     // event.preventDefault();
     //unhide navbar
-    $('.navbar').toggleClass('hidden');
+    $('.navbar').removeClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -113,3 +128,4 @@ $("#allBtn").on('click',function(){
     myParam.date="Future";
     // console.log(myParam.date);
 });
+$("#findEventBtn").on('click',updateParam);
