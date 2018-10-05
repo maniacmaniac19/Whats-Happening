@@ -2,6 +2,8 @@ const searchLocation=$("#searchArea");
 const catDump=$("#catDump");
 const myDump=$("#eventDump");
 const myCats=[];
+const catsIWant=[];
+let myPosition,skipZip;
 
 //default parameters
 let myParam = {
@@ -66,6 +68,62 @@ function xmlToJson(xml) {
 
 // RESUME CODE
 
+// Grabs and displays events
+function grabEvents(parameters) {
+    // console.log(myParam);
+    // This is how they want you calling the API
+    EVDB.API.call("/events/search", parameters, function (res) {
+        console.log(res);
+        // console.log(res.events.event[0]);
+        // Does something for each event in list
+        for (let i = 0; i < res.events.event.length; i++) {
+            // console.log(res.events.event[i].image);
+            //Checks to see if the event has an image
+            if (res.events.event[i].image!==null) {
+                myDump.append(`<div class="accordion" id="accordionEvent">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2>
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div class="collapse hide event${i}"  data-parent="#accordionEvent">
+                    <div class="card-body">
+                    <img src = ${res.events.event[i].image.thumb.url}>${res.events.event[i].description}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>`)
+    
+            }
+            else{                
+                myDump.append(`<div class="accordion" id="accordionEvent">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2>
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div class="collapse hide event${i}"  data-parent="#accordionEvent">
+                    <div class="card-body">
+                    ${res.events.event[i].description}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>`);
+            }
+        }
+    });
+}
+
 // Gets categories in an array
 const getCategories=function(){
     const queryUrl=`https://api.eventful.com/rest/categories/list?app_key=${myParam.app_key}`
@@ -92,37 +150,85 @@ function showCats(categoryList){
     // console.log(categoryList);
     for(let i=0;i<categoryList.length;i++){
         // console.log(categoryList[i].name);
-        catDump.append(`<input type="checkbox" id="${categoryList[i].id}">${categoryList[i].name}<br>`);
+        catDump.append(`<input type="checkbox" class="catCheck" id="${categoryList[i].id}">${categoryList[i].name}<br>`);
     }
+    // Adds event handler to check which cat is poked
+    catDump.on('change','.catCheck',function(){
+        let id = $(this).attr("id");
+        // console.log(id);
+        if(this.checked){
+            // console.log("Check happen");
+            catsIWant.push(id);
+            // console.log(catsIWant);
+        }
+        else{
+            // console.log('Uncheck');
+            let index=catsIWant.indexOf(id);
+            if(index > -1){
+                catsIWant.splice(index,1);
+            }
+            // console.log(catsIWant);
+        }
+    })
 }
 
 // Update parameters based on user input
-const updateParam=function(){
-    if(searchLocation.val()){
-        // console.log("valid");
-        document.getElementById("searchArea").style.backgroundColor="white";
-        document.getElementById("searchArea").removeAttribute("placeholder");
-        myParam.where=searchLocation.val().trim();
-        // console.log(myParam.where);
-        myParam.within=$("#distanceSlider").val();
+const updateParam = function () {
+    if (!skipZip) {
+        if (searchLocation.val()) {
+            // console.log("valid");
+            document.getElementById("searchArea").style.backgroundColor = "white";
+            document.getElementById("searchArea").removeAttribute("placeholder");
+
+            // Grab things
+            myParam.where = searchLocation.val().trim();
+            // console.log(myParam.where);
+            myParam.within = $("#distanceSlider").val();
+            // console.log(myParam.within);
+            let newCats = "";
+            for (let i = 0; i < catsIWant.length; i++) {
+                newCats += catsIWant[i] + ",";
+            }
+            myParam.category = newCats;
+            console.log(myParam.category);
+
+            // Now Do Things
+            showMenu();
+            $("#exampleModal").modal("hide");
+            myDump.empty();
+            grabEvents(myParam);
+            searchLocation.val("");
+
+        } else {
+            // console.log("invalid");
+            document.getElementById("searchArea").style.backgroundColor = "yellow";
+            document.getElementById("searchArea").setAttribute("placeholder", "Enter a city or zipcode.");
+        }
+    }
+    else{
+        // Grab things
+        myParam.within = $("#distanceSlider").val();
         // console.log(myParam.within);
+        let newCats = "";
+        for (let i = 0; i < catsIWant.length; i++) {
+            newCats += catsIWant[i] + ",";
+        }
+        myParam.category = newCats;
+        console.log(myParam.category);
+
+        // Now Do Things
         showMenu();
         $("#exampleModal").modal("hide");
         myDump.empty();
         grabEvents(myParam);
-        searchLocation.val("");
-
-    }else{
-        // console.log("invalid");
-        document.getElementById("searchArea").style.backgroundColor="yellow";
-        document.getElementById("searchArea").setAttribute("placeholder","Enter a city or zipcode.");
-    }
+        searchLocation.val("");}
 }
 
 // Asks user for location access
 const getLocation=function() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(savePosition);
+        return true;
     } 
     // else {
     //     x.innerHTML = "Geolocation is not supported by this browser.";
@@ -132,8 +238,15 @@ const getLocation=function() {
 const savePosition=function(position){
     myParam.where=`${position.coords.latitude},${position.coords.longitude}`
     // console.log(myParam.where);
+}
+
+function now(){
+    let location=getLocation();
+    if(location){
     showMenu();
     grabEvents(myParam);
+    }
+    
 }
 
 //Jared's Code
@@ -150,7 +263,6 @@ let showMenu = function (event) {
 
 //Show navigation bar and filter button when you click on the Now button in initial view.
 // $(".nowButton").on("click",showMenu);
-//Show navigation bar and filter button when you click on the Now button in initial view.
 
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
@@ -162,30 +274,8 @@ slider.oninput = function () {
 //End Jared's code
 
 
-function grabEvents(parameters) {
-    console.log(myParam);
-    // This is how they want you calling the API
-    EVDB.API.call("/events/search", parameters, function (res) {
-        console.log(res);
-        // console.log(res.events.event[0]);
-        // Does something for each event in list
-        for (let i = 0; i < res.events.event.length; i++) {
-            // console.log(res.events.event[i].image);
-            //Checks to see if the event has an image
-            if (res.events.event[i].image!==null) {
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
-            }
-            else{                
-                myDump.append(`<div class="event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
-            }
-        }
-    });
-}
-
-
-
 // Asks for geolocation permission, then runs the now section
-$(".nowButton").on('click',getLocation);
+$(".nowButton").on('click',now);
 
 //Pressing these changes the date parameter
 $("#todayBtn").on('click',function(){
@@ -204,7 +294,22 @@ $("#allBtn").on('click',function(){
     myParam.date="Future";
     // console.log(myParam.date);
 });
+// Updates parameters based on user input
 $("#findEventBtn").on('click',updateParam);
+
+// When user clicks use my location it runs location grabbing function
+$("#useMyLoc").change(function(){
+    if(this.checked){
+        skipZip=true;
+        // console.log(skipZip);
+        getLocation();
+    }
+    else{
+        skipZip=false;
+        // console.log(skipZip);
+    }
+});
+
 
 // Runs automatically to gather available categories
 getCategories();
