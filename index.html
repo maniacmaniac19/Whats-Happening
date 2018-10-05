@@ -12,6 +12,15 @@
 </head>
 
 <body>
+
+            <!-- Nav div -->
+            <nav class="navbar navbar-light bg-light hidden">
+                    <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
+        
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Find an Event
+                    </button>
+                </nav>
     <div class="container-fluid">
         <!-- Modal -->
         <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -86,14 +95,7 @@
             </div>
         </div>
 
-        <!-- Nav div -->
-        <nav class="navbar navbar-light bg-light hidden">
-            <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Find an Event
-            </button>
-        </nav>
         <div class="firstView">
             <h1 class="pageTitle">What's Happening?</h1>
             <div class="row">
@@ -131,7 +133,9 @@
     <!-- Moment js -->
     <script src="https://momentjs.com/downloads/moment.js"></script>
     <!-- Bootstrap JS -->
-    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Popper js -->
+    <script src="https://unpkg.com/popper.js/dist/umd/popper.min.js"></script>
     <!-- bootstrap functionality -->
     <!-- <script src="./assets/jared.js"></script> -->
     <script src="./assets/app.js"></script>

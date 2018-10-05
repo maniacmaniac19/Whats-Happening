@@ -69,12 +69,8 @@ let showMenu = function (event) {
     //prevent the default event
     // event.preventDefault();
     //unhide navbar
-<<<<<<< HEAD
     $('.navbar').toggleClass('hidden');
     $('.loadMore').toggleClass('hidden');
-=======
-    $('.navbar').removeClass('hidden');
->>>>>>> master
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -104,10 +100,45 @@ function grabEvents(parameters) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
             if (res.events.event[i].image!==null) {
-                myDump.append(`<div class="event-card event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
+                myDump.append(`<div class="accordion" id="accordionEvent">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2>
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div class="collapse hide event${i}"  data-parent="#accordionEvent">
+                    <div class="card-body">
+                    <img src = ${res.events.event[i].image.thumb.url}>${res.events.event[i].description}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>`)
+    
             }
             else{                
-                myDump.append(`<div class=" event-card event${i}"><h2>${res.events.event[i].title}</h2><p>${res.events.event[i].start_time}</p></div>`);
+                myDump.append(`<div class="accordion" id="accordionEvent">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h2>
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                      </button>
+                    </h2>
+                  </div>
+              
+                  <div class="collapse hide event${i}"  data-parent="#accordionEvent">
+                    <div class="card-body">
+                    ${res.events.event[i].description}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>`);
             }
         }
     });
@@ -134,3 +165,9 @@ $("#allBtn").on('click',function(){
     // console.log(myParam.date);
 });
 $("#findEventBtn").on('click',updateParam);
+
+//expand event description
+
+$('.event-card').on("click",function(){
+    console.log('event clicked')
+})
