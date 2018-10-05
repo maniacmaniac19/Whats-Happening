@@ -11,10 +11,79 @@ let myParam = {
     page_number: 1,
     page_size: 15,
     sort_order: "date",
-    within: "25 miles",
+    within: "25",
     include:'categories,subcategories,price,popularity,links',
     mature:"all"
 };
+
+// XML Converstion Code Snippets
+// Changes XML to JSON https://gist.github.com/chinchang/8106a82c56ad007e27b1
+// Modified version from here: http://davidwalsh.name/convert-xml-json
+function xmlToJson(xml) {
+
+	// Create the return object
+	var obj = {};
+
+	if (xml.nodeType == 1) { // element
+		// do attributes
+		if (xml.attributes.length > 0) {
+		obj["@attributes"] = {};
+			for (var j = 0; j < xml.attributes.length; j++) {
+				var attribute = xml.attributes.item(j);
+				obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+			}
+		}
+	} else if (xml.nodeType == 3) { // text
+		obj = xml.nodeValue;
+	}
+
+	// do children
+	// If just one text node inside
+	if (xml.hasChildNodes() && xml.childNodes.length === 1 && xml.childNodes[0].nodeType === 3) {
+		obj = xml.childNodes[0].nodeValue;
+	}
+	else if (xml.hasChildNodes()) {
+		for(var i = 0; i < xml.childNodes.length; i++) {
+			var item = xml.childNodes.item(i);
+			var nodeName = item.nodeName;
+			if (typeof(obj[nodeName]) == "undefined") {
+				obj[nodeName] = xmlToJson(item);
+			} else {
+				if (typeof(obj[nodeName].push) == "undefined") {
+					var old = obj[nodeName];
+					obj[nodeName] = [];
+					obj[nodeName].push(old);
+				}
+				obj[nodeName].push(xmlToJson(item));
+			}
+		}
+	}
+	return obj;
+}
+
+
+// RESUME CODE
+
+// Gets categories in an array
+let myCats=[];
+const getCategories=function(){
+    const queryUrl=`https://api.eventful.com/rest/categories/list?app_key=${myParam.app_key}`
+    $.ajax({
+        url:queryUrl,
+        method:"GET",
+        type:"JSONP"
+    }).then(function(res){
+        res=xmlToJson(res);
+        console.log(res);
+        for(let i=0;i<res.categories.category.length;i++){
+            // console.log(`${i}: ${res.categories.category[i].id}`);
+            let myObj={id:res.categories.category[i].id,name:res.categories.category[i].name}
+            myCats.push(myObj);
+        }
+        console.log(myCats);
+    })
+
+}
 
 // Update parameters based on user input
 const updateParam=function(){
@@ -24,10 +93,13 @@ const updateParam=function(){
         document.getElementById("searchArea").removeAttribute("placeholder");
         myParam.where=searchLocation.val().trim();
         // console.log(myParam.where);
+        myParam.within=$("#distanceSlider").val();
+        // console.log(myParam.within);
         showMenu();
         $("#exampleModal").modal("hide");
         myDump.empty();
         grabEvents(myParam);
+        searchLocation.val("");
 
     }else{
         // console.log("invalid");
@@ -54,6 +126,7 @@ const savePosition=function(position){
 }
 
 //Jared's Code
+<<<<<<< HEAD
 let showFilter = function (event) {
     event.preventDefault();
     // console.log("yes")
@@ -64,13 +137,20 @@ let showFilter = function (event) {
 
 $(".showFilter").on("click", showFilter);
 
+=======
+>>>>>>> master
 //bring the menu back based upon clicking now
 let showMenu = function (event) {
     //prevent the default event
     // event.preventDefault();
     //unhide navbar
+<<<<<<< HEAD
     $('.navbar').toggleClass('hidden');
     $('.loadMore').toggleClass('hidden');
+=======
+    $('.navbar').removeClass('hidden');
+    $('.loadMore').removeClass('hidden');
+>>>>>>> master
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -90,7 +170,7 @@ slider.oninput = function () {
 
 
 function grabEvents(parameters) {
-    // console.log(myParam);
+    console.log(myParam);
     // This is how they want you calling the API
     EVDB.API.call("/events/search", parameters, function (res) {
         console.log(res);
@@ -166,8 +246,13 @@ $("#allBtn").on('click',function(){
 });
 $("#findEventBtn").on('click',updateParam);
 
+<<<<<<< HEAD
 //expand event description
 
 $('.event-card').on("click",function(){
     console.log('event clicked')
 })
+=======
+// Runs automatically to gather available categories
+getCategories();
+>>>>>>> master
