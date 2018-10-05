@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        #map {
+            height:500px;
+            width:100%
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>We Outchea</h3> <br/>
+    <!--The div element is for the map-->
+    <form>
+        Latitude: <input type="text" name="Latitude" id="latitude"/> <br/>
+        Longitude: <input type="text" name="Longitude" id= "longitude"/> <br/>
+    </form>
+
+    <button type="submit" value="submit" id="getLocation">Get Location</button> <br/>
+    
+    <div id="map"></div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"> </script>
+    <script src="./map.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2xsHpiAM_RrJGbNDoQW2j8PX-vtfnWhk&callback=initMap"
+        type="text/javascript"></script>
+</body>
+
+</html>
