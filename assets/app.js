@@ -1,5 +1,7 @@
 const searchLocation=$("#searchArea");
+const catDump=$("#catDump");
 const myDump=$("#eventDump");
+const myCats=[];
 
 //default parameters
 let myParam = {
@@ -65,7 +67,6 @@ function xmlToJson(xml) {
 // RESUME CODE
 
 // Gets categories in an array
-let myCats=[];
 const getCategories=function(){
     const queryUrl=`https://api.eventful.com/rest/categories/list?app_key=${myParam.app_key}`
     $.ajax({
@@ -74,15 +75,25 @@ const getCategories=function(){
         type:"JSONP"
     }).then(function(res){
         res=xmlToJson(res);
-        console.log(res);
+        // console.log(res);
         for(let i=0;i<res.categories.category.length;i++){
             // console.log(`${i}: ${res.categories.category[i].id}`);
             let myObj={id:res.categories.category[i].id,name:res.categories.category[i].name}
             myCats.push(myObj);
         }
-        console.log(myCats);
+        // console.log(myCats);
+        showCats(myCats);
     })
 
+}
+
+// Dynamically generates category list in window
+function showCats(categoryList){
+    // console.log(categoryList);
+    for(let i=0;i<categoryList.length;i++){
+        // console.log(categoryList[i].name);
+        catDump.append(`<input type="checkbox" id="${categoryList[i].id}">${categoryList[i].name}<br>`);
+    }
 }
 
 // Update parameters based on user input
@@ -170,6 +181,8 @@ function grabEvents(parameters) {
         }
     });
 }
+
+
 
 // Asks for geolocation permission, then runs the now section
 $(".nowButton").on('click',getLocation);
