@@ -26,18 +26,19 @@ h1{
     font-family: 'Rock Salt', cursive;
     color: floralwhite;
 }
-
-
 .modal-body{
     color:black;
 }
 
-
 .firstBtns{
     margin-top: 20px;
     text-align: center;
-    
-    
+     
+}
+
+.eventBtn{
+    background-color: whitesmoke;
+    text-align: left;
 }
 
 .btn-xlarge{
@@ -63,14 +64,4 @@ h1{
 #or{
     color: floralwhite;
     margin-top: 8px;
-}
-
-.event-card{
-    
-    margin-top: 50px;
-}
-
-.eventBtn{
-    background-color: whitesmoke;
-    text-align: left;
 }
