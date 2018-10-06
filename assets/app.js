@@ -11,7 +11,7 @@ let myParam = {
     //   q: "music",
     // where: "32.929164799999995,-97.01022979999999",
     where:``,
-    date: "Future",
+    date: "Today",
     page_number: 1,
     page_size: 15,
     sort_order: "date",
@@ -248,6 +248,10 @@ function now(){
     }
     
 }
+function loadMore(){
+    myParam.page_number+=1;
+    grabEvents(myParam);
+}
 
 //Jared's Code
 //bring the menu back based upon clicking now
@@ -309,7 +313,7 @@ $("#useMyLoc").change(function(){
         // console.log(skipZip);
     }
 });
-
+$("#loadMoreBtn").click(loadMore);
 
 // Runs automatically to gather available categories
 getCategories();
