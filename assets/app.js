@@ -257,13 +257,7 @@ const savePositionNow=function(position){
     showMenu();
     grabEvents(myParam);
 }
-// function now(){
-//     getLocation();
-//     showMenu();
-//     console.log(myParam);
-//     grabEvents(myParam);
-    
-// }
+
 function loadMore(){
     myParam.page_number+=1;
     grabEvents(myParam);
@@ -280,6 +274,7 @@ let showMenu = function (event) {
     // event.preventDefault();
     //unhide navbar
     $('.navbar').removeClass('hidden');
+    // Removed to allow unhide based on returned values
     // $('.loadMore').removeClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
