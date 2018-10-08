@@ -51,6 +51,18 @@ h1{
     padding: 0;
 }
 
+.card .card-header .card-body .accordion{
+    background: none;
+    /* opacity: 0; */
+    background: rgba(0,0,0,0.2);
+}
+
+#eventDump{
+    margin-top:60px;
+    margin-bottom:60px;
+    /* background-image: url(./images/nightlife.png); */
+}
+
 #tagLine{
     text-align: center;
     color: floralwhite;
@@ -59,5 +71,11 @@ h1{
 #or{
     color: floralwhite;
     margin-top: 8px;
+}
+
+#catDump {
+    -webkit-column-count: 2; /* Chrome, Safari, Opera */
+    -moz-column-count: 2; /* Firefox */
+    column-count: 2;
 }
 

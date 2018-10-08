@@ -84,7 +84,7 @@ function grabEvents(parameters) {
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2>
-                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i} " >
                         ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
                       </button>
                     </h2>
@@ -268,8 +268,8 @@ let showMenu = function (event) {
 //Show navigation bar and filter button when you click on the Now button in initial view.
 // $(".nowButton").on("click",showMenu);
 
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
+let slider = document.getElementById("distanceSlider");
+let output = document.getElementById("value");
 output.innerHTML = slider.value;
 
 slider.oninput = function () {
