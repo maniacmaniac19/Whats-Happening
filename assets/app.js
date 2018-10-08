@@ -3,19 +3,20 @@ const catDump=$("#catDump");
 const myDump=$("#eventDump");
 const myCats=[];
 const catsIWant=[];
-let myPosition,skipZip;
+let myPosition,skipZip,myLat,myLong;
 
 //default parameters
 let myParam = {
     app_key: "LT5Q2szWsMzXGZpj",
     //   q: "music",
     // where: "32.929164799999995,-97.01022979999999",
-    where:``,
+    location:``,
     date: "Today",
     page_number: 1,
     page_size: 15,
     sort_order: "date",
     within: "25",
+    units:"mi",
     include:'categories,subcategories,price,popularity,links',
     mature:"all"
 };
@@ -85,7 +86,7 @@ function grabEvents(parameters) {
                   <div class="card-header" id="headingOne">
                     <h2>
                       <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
-                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p><a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${res.events.event[i].latitude}&dropoff[longitude]=${res.events.event[i].longitude}">Get a Ride with Uber</a><br>Latitude:${res.events.event[i].latitude} Longitude:${res.events.event[i].longitude}
                       </button>
                     </h2>
                   </div>
@@ -181,9 +182,9 @@ const updateParam = function () {
             document.getElementById("searchArea").removeAttribute("placeholder");
 
             // Grab things
-            myParam.where = searchLocation.val().trim();
+            myParam.location = searchLocation.val().trim();
             // console.log(myParam.where);
-            myParam.within = $("#distanceSlider").val();
+            myParam.within = `${$("#distanceSlider").val()}mi`;
             // console.log(myParam.within);
             let newCats = "";
             for (let i = 0; i < catsIWant.length; i++) {
@@ -207,14 +208,14 @@ const updateParam = function () {
     }
     else{
         // Grab things
-        myParam.within = $("#distanceSlider").val();
+        myParam.within = `${$("#distanceSlider").val()}mi`;
         // console.log(myParam.within);
         let newCats = "";
         for (let i = 0; i < catsIWant.length; i++) {
             newCats += catsIWant[i] + ",";
         }
         myParam.category = newCats;
-        console.log(myParam.category);
+        // console.log(myParam.category);
 
         // Now Do Things
         showMenu();
@@ -236,14 +237,18 @@ const getLocation=function() {
 }
 // Updates user location data, calls the showMenu and makes initial API call
 const savePosition=function(position){
-    myParam.where=`${position.coords.latitude},${position.coords.longitude}`
-    // console.log(myParam.where);
+    myLat=position.coords.latitude;
+    myLong=position.coords.longitude;
+    myParam.location=`${myLat},${myLong}`;
+    
+    console.log(myParam.location);
 }
 
 function now(){
-    let location=getLocation();
-    if(location){
+    let locat=getLocation();
+    if(locat){
     showMenu();
+    console.log(myParam);
     grabEvents(myParam);
     }
     
@@ -253,6 +258,10 @@ function loadMore(){
     grabEvents(myParam);
 }
 
+// function uberLink(myLat,myLong,destLat,destLong){
+// let myURL=`https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLong}`
+
+// }
 //Jared's Code
 //bring the menu back based upon clicking now
 let showMenu = function (event) {
@@ -268,13 +277,13 @@ let showMenu = function (event) {
 //Show navigation bar and filter button when you click on the Now button in initial view.
 // $(".nowButton").on("click",showMenu);
 
-var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
-output.innerHTML = slider.value;
+// var slider = document.getElementById("myRange");
+// var output = document.getElementById("demo");
+// output.innerHTML = slider.value;
 
-slider.oninput = function () {
-    output.innerHTML = this.value;
-}
+// slider.oninput = function () {
+//     output.innerHTML = this.value;
+// }
 //End Jared's code
 
 
