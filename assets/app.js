@@ -268,13 +268,13 @@ let showMenu = function (event) {
 //Show navigation bar and filter button when you click on the Now button in initial view.
 // $(".nowButton").on("click",showMenu);
 
-// var slider = document.getElementById("myRange");
-// var output = document.getElementById("demo");
-// output.innerHTML = slider.value;
+let slider = document.getElementById("distanceSlider");
+let output = document.getElementById("value");
+output.innerHTML = slider.value;
 
-// slider.oninput = function () {
-//     output.innerHTML = this.value;
-// }
+slider.oninput = function () {
+    output.innerHTML = this.value;
+}
 //End Jared's code
 
 
