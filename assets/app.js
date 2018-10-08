@@ -122,6 +122,13 @@ function grabEvents(parameters) {
               </div>`);
             }
         }
+        // console.log(res.total_items,res.page_size);
+        if(res.total_items>res.page_size){
+            $('.loadMore').removeClass('hidden');
+        }else{
+            $(".loadMore").addClass('hidden');
+            // console.log("Thats all.");
+        }
     });
 }
 
@@ -226,9 +233,9 @@ const updateParam = function () {
 }
 
 // Asks user for location access
-const getLocation=function() {
+const getLocation=function(saveFunction) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(savePosition);
+        navigator.geolocation.getCurrentPosition(saveFunction);
         return true;
     } 
     // else {
@@ -240,19 +247,23 @@ const savePosition=function(position){
     myLat=position.coords.latitude;
     myLong=position.coords.longitude;
     myParam.location=`${myLat},${myLong}`;
-    
-    console.log(myParam.location);
+    // console.log(myParam.location);
 }
-
-function now(){
-    let locat=getLocation();
-    if(locat){
+const savePositionNow=function(position){
+    myLat=position.coords.latitude;
+    myLong=position.coords.longitude;
+    myParam.location=`${myLat},${myLong}`;
+    // console.log(myParam.location);
     showMenu();
-    console.log(myParam);
     grabEvents(myParam);
-    }
-    
 }
+// function now(){
+//     getLocation();
+//     showMenu();
+//     console.log(myParam);
+//     grabEvents(myParam);
+    
+// }
 function loadMore(){
     myParam.page_number+=1;
     grabEvents(myParam);
@@ -269,7 +280,7 @@ let showMenu = function (event) {
     // event.preventDefault();
     //unhide navbar
     $('.navbar').removeClass('hidden');
-    $('.loadMore').removeClass('hidden');
+    // $('.loadMore').removeClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -288,7 +299,7 @@ let showMenu = function (event) {
 
 
 // Asks for geolocation permission, then runs the now section
-$(".nowButton").on('click',now);
+$(".nowButton").on('click',function(){getLocation(savePositionNow)});
 
 //Pressing these changes the date parameter
 $("#todayBtn").on('click',function(){
@@ -315,7 +326,7 @@ $("#useMyLoc").change(function(){
     if(this.checked){
         skipZip=true;
         // console.log(skipZip);
-        getLocation();
+        getLocation(savePosition);
     }
     else{
         skipZip=false;

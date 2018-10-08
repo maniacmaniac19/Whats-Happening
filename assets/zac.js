@@ -1,9 +1,10 @@
-let lat=32.7767,long=-96.7970;
+// Verifying Uber Functionality
+// let lat=32.7767,long=-96.7970;
 
-let queryURL=`https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${lat}8&pickup[longitude]=${long}&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818`
+// let queryURL=`https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${lat}8&pickup[longitude]=${long}&dropoff[latitude]=37.802374&dropoff[longitude]=-122.405818`
+// This link is functional
 
-
-$("#myLink").append(`<a href="${queryURL}">Open Uber</a>`);
+// $("#myLink").append(`<a href="${queryURL}">Open Uber</a>`);
 // var x = document.getElementById("demo");
 // const eventsDisp = $("#content");
 // let myLat=35.6895;
@@ -84,3 +85,4 @@ $("#myLink").append(`<a href="${queryURL}">Open Uber</a>`);
 
 // $("#locationBtn").on('click',getLocation);
 // $("#pullBtn").on('click',grabEvents)
+
