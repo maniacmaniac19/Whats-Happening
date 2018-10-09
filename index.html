@@ -12,21 +12,20 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-dark fixed-top bg-dark hidden">
-                <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
-    
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+    <nav class="navbar navbar-dark fixed-top bg-dark hidden">
+        <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
+
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
                     Find an Event
                 </button>
-            </nav>
+    </nav>
     <div class="container-fluid">
         <!-- Modal -->
-        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search</h5>
+                        <h5 class="modal-title" id="ModalLabel">Search</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -36,33 +35,21 @@
 
                             <!--The user will be able to find events happening daily, weekly, the following week, and all events by clicking on buttons.-->
                             <h4>DATE</h4>
-                            <button type="button" id="todayBtn">TODAY</button>
-                            <button type="button" id="thisweekBtn">THIS WEEK</button>
-                            <button type="button" id="nextweekBtn">NEXT WEEK</button>
-                            <button type="button" id="allBtn">ALL</button>
+                            <button class="timebutton" type="button" id="todayBtn">TODAY</button>
+                            <button class="timebutton" type="button" id="thisweekBtn">THIS WEEK</button>
+                            <button class="timebutton" type="button" id="nextweekBtn">NEXT WEEK</button>
+                            <button class="timebutton" type="button" id="allBtn">ALL</button>
 
                             <h4>LOCATION</h4>
                             <input type="checkbox" name="location" value="location" id="useMyLoc"> Use My Location <br>
                             Zip Code/City <input type="text" name="city" id="searchArea">
 
-
                             <!-- //!--The user will be able to find events according to distance(0-50miles) by using a distance slider-->
                             <h4>DISTANCE</h4>
-                            <div >
-                                
-                                <input id="distanceSlider" type="range" name="points" id="points" value="50" min="1" max="100"
-                                    data-show-value="true">
-                                    <p> <span id="value"></span> miles</p>
+                            <div>
+                                <input id="distanceSlider" type="range" name="points" id="points" value="50" min="1" max="100" data-show-value="true">
+                                <p> <span id="value"></span>miles</p>
                             </div>
-
-
-                            <!-- This was for testing purposes
-                            <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                                <p>Value: <span id="demo"></span></p>
-                            </div> -->
-
-
 
                             <!---The user will be able to choose from various categories to narrow down event selections-->
                             <h4>CATEGORIES</h4>
@@ -78,8 +65,6 @@
             </div>
         </div>
 
-        <!-- Nav div -->
-       
         <div class="firstView">
             <h1 class="pageTitle">What's Happening?</h1>
             <div class="row">
@@ -100,7 +85,7 @@
         <div id="eventDump"></div>
         <div id="row">
             <div class="col-12">
-                <button class="btn loadMore hidden align-center" id="loadMoreBtn">Load More</button>
+                <button class="btn btn-success loadMore hidden align-center" id="loadMoreBtn">Load More</button>
             </div>
         </div>
 
@@ -110,11 +95,13 @@
     <div id="div50"></div>
 
     <!-- Basic jQuery library -->
-    <script src= "https://code.jquery.com/jquery-3.3.1.min.js"> </script> <!-- Eventful API Link -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js">
+    </script>
+    <!-- Eventful API Link -->
     <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
     <!-- Moment js -->
     <script src="https://momentjs.com/downloads/moment.js"></script>
-   
+
     <!-- Bootstrap JS -->
     <script src="./assets/js/bootstrap.min.js"></script>
     <!-- bootstrap functionality -->
