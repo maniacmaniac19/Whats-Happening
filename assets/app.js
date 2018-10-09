@@ -69,20 +69,45 @@ function xmlToJson(xml) {
 
 // RESUME CODE
 
-function eventContent(eventData){
-    let retStr="";
-    let eventName=eventData.title;
-    let eventTime=eventData.start_time;
-    let locationExist=false;
-    let imgExist=false;
-    if(eventData.latitude){
-        let eventLat=eventData.latitude;
-        let eventLong=eventData.longitude;
-        let uberLink=`<a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${eventData.latitude}&dropoff[longitude]=${eventData.longitude}">Get a Ride with Uber</a>`
+function eventExtras(eventData){
+    // This returns the string to display additional data for the accordion events
+    // Description, url, categories, image, venue address, Uber link 
+    let retStr=`<div class="container"><div class='row'>`;
+    let theseCats="";
+
+    // If things exist, then ...
+    retStr+=`<div class="col-8">`
+    if(eventData.venue_address){
+        retStr+=`${eventData.venue_address}`
     }
+    retStr+=`</div><div class="col-4">`
     if(eventData.image){
-        eventImg=eventData.image;
+        retStr+=`<img src=${eventData.image.thumb.url}>`
     }
+    retStr+=`</div></div><div class="row"><div class="col-12">`
+    if(eventData.description){
+        retStr+=`${eventData.description}`
+    }else{
+        retStr+="No Description Provided."
+    }
+    retStr+=`</div></div><div class="row"><div class="col-6">`
+    if(eventData.categories){
+        for(let i=0;i<eventData.categories.category.length;i++){
+            if(eventData.categories.category.length===1){
+                theseCats=`${eventData.categories.category[0].name}`;
+            }else{
+                theseCats+=`${eventData.categories.category[i].name}, `
+            }
+        }
+        retStr+=theseCats;
+    }
+    retStr+=`</div><div class="col-6">`
+    if(eventData.latitude){
+        retStr+=`<a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${eventData.latitude}&dropoff[longitude]=${eventData.longitude}">Get a Ride with Uber</a>`
+
+    }
+    retStr+=`</div></div></div>`
+    // console.log(retStr);
     return retStr;
 }
 
@@ -98,20 +123,21 @@ function grabEvents(parameters) {
         for (let i = 0; i < res.events.event.length; i++) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
+            let extras=eventExtras(res.events.event[i]);
             if (res.events.event[i].image!==null) {
                 accordion.append(`
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2>
                       <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
-                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p><a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${res.events.event[i].latitude}&dropoff[longitude]=${res.events.event[i].longitude}">Get a Ride with Uber</a><br>Latitude:${res.events.event[i].latitude} Longitude:${res.events.event[i].longitude}
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
                       </button>
                     </h2>
                   </div>
               
                   <div class="collapse hide event${i}"  data-parent="#accordionEvent">
                     <div class="card-body">
-                    <img src = ${res.events.event[i].image.thumb.url}>${res.events.event[i].description}
+                    ${extras}
                     </div>
                   </div>
                 </div>
@@ -132,7 +158,7 @@ function grabEvents(parameters) {
               
                   <div class="collapse hide event${i}"  data-parent="#accordionEvent">
                     <div class="card-body">
-                    ${res.events.event[i].description}
+                    ${extras}
                     </div>
                   </div>
                 </div>
@@ -141,11 +167,11 @@ function grabEvents(parameters) {
             }
         }
         myDump.append(accordion);
-        console.log(res.total_items,res.page_size);
+        // console.log(res.total_items,res.page_size);
         res.total_items=parseInt(res.total_items);
         res.page_size=parseInt(res.page_size);
         if(res.total_items>res.page_size){
-            console.log("There's more");
+            // console.log("There's more");
             $('#loadMoreBtn').removeClass('hidden');
         }else{
             $("#loadMoreBtn").addClass('hidden');
@@ -309,9 +335,9 @@ let slider = document.getElementById("distanceSlider");
 let output = document.getElementById("value");
 output.innerHTML = slider.value;
 
-// slider.oninput = function () {
-//     output.innerHTML = this.value;
-// }
+slider.oninput = function () {
+    output.innerHTML = this.value;
+}
 //End Jared's code
 
 
