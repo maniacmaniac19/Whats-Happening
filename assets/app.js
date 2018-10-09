@@ -3,19 +3,20 @@ const catDump=$("#catDump");
 const myDump=$("#eventDump");
 const myCats=[];
 const catsIWant=[];
-let myPosition,skipZip;
+let myPosition,skipZip,myLat,myLong;
 
 //default parameters
 let myParam = {
     app_key: "LT5Q2szWsMzXGZpj",
     //   q: "music",
     // where: "32.929164799999995,-97.01022979999999",
-    where:``,
+    location:``,
     date: "Today",
     page_number: 1,
     page_size: 15,
     sort_order: "date",
     within: "25",
+    units:"mi",
     include:'categories,subcategories,price,popularity,links',
     mature:"all"
 };
@@ -84,8 +85,8 @@ function grabEvents(parameters) {
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2>
-                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i} " >
-                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
+                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p><a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${res.events.event[i].latitude}&dropoff[longitude]=${res.events.event[i].longitude}">Get a Ride with Uber</a><br>Latitude:${res.events.event[i].latitude} Longitude:${res.events.event[i].longitude}
                       </button>
                     </h2>
                   </div>
@@ -120,6 +121,13 @@ function grabEvents(parameters) {
                 </div>
               </div>`);
             }
+        }
+        // console.log(res.total_items,res.page_size);
+        if(res.total_items>res.page_size){
+            $('.loadMore').removeClass('hidden');
+        }else{
+            $(".loadMore").addClass('hidden');
+            // console.log("Thats all.");
         }
     });
 }
@@ -181,9 +189,9 @@ const updateParam = function () {
             document.getElementById("searchArea").removeAttribute("placeholder");
 
             // Grab things
-            myParam.where = searchLocation.val().trim();
+            myParam.location = searchLocation.val().trim();
             // console.log(myParam.where);
-            myParam.within = $("#distanceSlider").val();
+            myParam.within = `${$("#distanceSlider").val()}mi`;
             // console.log(myParam.within);
             let newCats = "";
             for (let i = 0; i < catsIWant.length; i++) {
@@ -207,14 +215,14 @@ const updateParam = function () {
     }
     else{
         // Grab things
-        myParam.within = $("#distanceSlider").val();
+        myParam.within = `${$("#distanceSlider").val()}mi`;
         // console.log(myParam.within);
         let newCats = "";
         for (let i = 0; i < catsIWant.length; i++) {
             newCats += catsIWant[i] + ",";
         }
         myParam.category = newCats;
-        console.log(myParam.category);
+        // console.log(myParam.category);
 
         // Now Do Things
         showMenu();
@@ -225,9 +233,9 @@ const updateParam = function () {
 }
 
 // Asks user for location access
-const getLocation=function() {
+const getLocation=function(saveFunction) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(savePosition);
+        navigator.geolocation.getCurrentPosition(saveFunction);
         return true;
     } 
     // else {
@@ -236,23 +244,29 @@ const getLocation=function() {
 }
 // Updates user location data, calls the showMenu and makes initial API call
 const savePosition=function(position){
-    myParam.where=`${position.coords.latitude},${position.coords.longitude}`
-    // console.log(myParam.where);
+    myLat=position.coords.latitude;
+    myLong=position.coords.longitude;
+    myParam.location=`${myLat},${myLong}`;
+    // console.log(myParam.location);
 }
-
-function now(){
-    let location=getLocation();
-    if(location){
+const savePositionNow=function(position){
+    myLat=position.coords.latitude;
+    myLong=position.coords.longitude;
+    myParam.location=`${myLat},${myLong}`;
+    // console.log(myParam.location);
     showMenu();
     grabEvents(myParam);
-    }
-    
 }
+
 function loadMore(){
     myParam.page_number+=1;
     grabEvents(myParam);
 }
 
+// function uberLink(myLat,myLong,destLat,destLong){
+// let myURL=`https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${destLat}&dropoff[longitude]=${destLong}`
+
+// }
 //Jared's Code
 //bring the menu back based upon clicking now
 let showMenu = function (event) {
@@ -260,7 +274,8 @@ let showMenu = function (event) {
     // event.preventDefault();
     //unhide navbar
     $('.navbar').removeClass('hidden');
-    $('.loadMore').removeClass('hidden');
+    // Removed to allow unhide based on returned values
+    // $('.loadMore').removeClass('hidden');
     //hide initial view of application
     $('.firstView').hide();
 }
@@ -272,14 +287,14 @@ let slider = document.getElementById("distanceSlider");
 let output = document.getElementById("value");
 output.innerHTML = slider.value;
 
-slider.oninput = function () {
-    output.innerHTML = this.value;
-}
+// slider.oninput = function () {
+//     output.innerHTML = this.value;
+// }
 //End Jared's code
 
 
 // Asks for geolocation permission, then runs the now section
-$(".nowButton").on('click',now);
+$(".nowButton").on('click',function(){getLocation(savePositionNow)});
 
 //Pressing these changes the date parameter
 $("#todayBtn").on('click',function(){
@@ -306,7 +321,7 @@ $("#useMyLoc").change(function(){
     if(this.checked){
         skipZip=true;
         // console.log(skipZip);
-        getLocation();
+        getLocation(savePosition);
     }
     else{
         skipZip=false;
