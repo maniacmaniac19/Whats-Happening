@@ -2,7 +2,6 @@ body{
     font-family: 'Share', cursive;
     background-image: url(./images/nightlife.png);
     background-attachment: fixed;
-
 }
 
 datalist{
@@ -23,11 +22,9 @@ h1{
     color: floralwhite;
 }
 
-
 .modal-body{
     color:black;
 }
-
 
 .firstBtns{
     margin-top: 20px;
@@ -36,8 +33,13 @@ h1{
     
 }
 
+.active{
+    background: dodgerblue;
+}
+
 .btn-xlarge{
-    padding: 20px 30px;
+    padding: 40px 60px;
+    font-size: 1.5rem;
 }
 
 .loadMore{
@@ -51,9 +53,12 @@ h1{
     padding: 0;
 }
 
+#div50{
+height: 50px;
+}
+
 #eventDump{
     margin-top:60px;
-    margin-bottom:60px;
 }
 
 #tagLine{
