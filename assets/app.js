@@ -119,11 +119,12 @@ function grabEvents(parameters) {
         console.log(res);
         // console.log(res.events.event[0]);
         // Does something for each event in list
+        let accordion = $(`<div class="accordion" id="accordionEvent">`)
         for (let i = 0; i < res.events.event.length; i++) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
             if (res.events.event[i].image!==null) {
-                myDump.append(`<div class="accordion" id="accordionEvent">
+                accordion.append(`
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2>
@@ -144,14 +145,14 @@ function grabEvents(parameters) {
     
             }
             else{                
-                myDump.append(`<div class="accordion" id="accordionEvent">
+                accordion.append(`<div class="accordion" id="accordionEvent">
                 <div class="card">
                   <div class="card-header" id="headingOne">
-                    <h2>
-                      <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
+                    <row>
+                      <button class="btn eventBtn col-xs-12" type="button" data-toggle="collapse" data-target=".event${i}" >
                         ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
                       </button>
-                    </h2>
+                    </row>
                   </div>
               
                   <div class="collapse hide event${i}"  data-parent="#accordionEvent">
@@ -164,7 +165,7 @@ function grabEvents(parameters) {
               </div>`);
             }
         }
-        eventExtras(res.events.event[0]);
+        myDump.append(accordion);
         // console.log(res.total_items,res.page_size);
         res.total_items=parseInt(res.total_items);
         res.page_size=parseInt(res.page_size);
