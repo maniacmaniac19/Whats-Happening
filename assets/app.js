@@ -69,20 +69,45 @@ function xmlToJson(xml) {
 
 // RESUME CODE
 
-function eventContent(eventData){
-    let retStr="";
-    let eventName=eventData.title;
-    let eventTime=eventData.start_time;
-    let locationExist=false;
-    let imgExist=false;
-    if(eventData.latitude){
-        let eventLat=eventData.latitude;
-        let eventLong=eventData.longitude;
-        let uberLink=`<a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${eventData.latitude}&dropoff[longitude]=${eventData.longitude}">Get a Ride with Uber</a>`
+function eventExtras(eventData){
+    // This returns the string to display additional data for the accordion events
+    // Description, url, categories, image, venue address, Uber link 
+    let retStr=`<div class="container"><div class='row'>`;
+    let theseCats="";
+
+    // If things exist, then ...
+    retStr+=`<div class="col-8">`
+    if(eventData.venue_address){
+        retStr+=`${eventData.venue_address}`
     }
+    retStr+=`</div><div class="col-4">`
     if(eventData.image){
-        eventImg=eventData.image;
+        retStr+=`<img src=${eventData.image.thumb.url}>`
     }
+    retStr+=`</div></div><div class="row"><div class="col-12">`
+    if(eventData.description){
+        retStr+=`${eventData.description}`
+    }else{
+        retStr+="No Description Provided."
+    }
+    retStr+=`</div></div><div class="row"><div class="col-6">`
+    if(eventData.categories){
+        for(let i=0;i<eventData.categories.category.length;i++){
+            if(eventData.categories.category.length===1){
+                theseCats=`${eventData.categories.category[0].name}`;
+            }else{
+                theseCats+=`${eventData.categories.category[i].name}, `
+            }
+        }
+        retStr+=theseCats;
+    }
+    retStr+=`</div><div class="col-6">`
+    if(eventData.latitude){
+        retStr+=`<a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${eventData.latitude}&dropoff[longitude]=${eventData.longitude}">Get a Ride with Uber</a>`
+
+    }
+    retStr+=`</div></div></div>`
+    // console.log(retStr);
     return retStr;
 }
 
@@ -139,11 +164,12 @@ function grabEvents(parameters) {
               </div>`);
             }
         }
-        console.log(res.total_items,res.page_size);
+        eventExtras(res.events.event[0]);
+        // console.log(res.total_items,res.page_size);
         res.total_items=parseInt(res.total_items);
         res.page_size=parseInt(res.page_size);
         if(res.total_items>res.page_size){
-            console.log("There's more");
+            // console.log("There's more");
             $('#loadMoreBtn').removeClass('hidden');
         }else{
             $("#loadMoreBtn").addClass('hidden');
