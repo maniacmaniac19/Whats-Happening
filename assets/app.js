@@ -13,7 +13,7 @@ let myParam = {
     location:``,
     date: "Today",
     page_number: 1,
-    page_size: 15,
+    page_size: 20,
     sort_order: "date",
     within: "25",
     units:"mi",
@@ -69,6 +69,23 @@ function xmlToJson(xml) {
 
 // RESUME CODE
 
+function eventContent(eventData){
+    let retStr="";
+    let eventName=eventData.title;
+    let eventTime=eventData.start_time;
+    let locationExist=false;
+    let imgExist=false;
+    if(eventData.latitude){
+        let eventLat=eventData.latitude;
+        let eventLong=eventData.longitude;
+        let uberLink=`<a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${eventData.latitude}&dropoff[longitude]=${eventData.longitude}">Get a Ride with Uber</a>`
+    }
+    if(eventData.image){
+        eventImg=eventData.image;
+    }
+    return retStr;
+}
+
 // Grabs and displays events
 function grabEvents(parameters) {
     // console.log(myParam);
@@ -122,11 +139,14 @@ function grabEvents(parameters) {
               </div>`);
             }
         }
-        // console.log(res.total_items,res.page_size);
+        console.log(res.total_items,res.page_size);
+        res.total_items=parseInt(res.total_items);
+        res.page_size=parseInt(res.page_size);
         if(res.total_items>res.page_size){
-            $('.loadMore').removeClass('hidden');
+            console.log("There's more");
+            $('#loadMoreBtn').removeClass('hidden');
         }else{
-            $(".loadMore").addClass('hidden');
+            $("#loadMoreBtn").addClass('hidden');
             // console.log("Thats all.");
         }
     });
@@ -328,6 +348,7 @@ $("#useMyLoc").change(function(){
         // console.log(skipZip);
     }
 });
+
 $("#loadMoreBtn").click(loadMore);
 
 // Runs automatically to gather available categories
