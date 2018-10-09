@@ -123,20 +123,21 @@ function grabEvents(parameters) {
         for (let i = 0; i < res.events.event.length; i++) {
             // console.log(res.events.event[i].image);
             //Checks to see if the event has an image
+            let extras=eventExtras(res.events.event[i]);
             if (res.events.event[i].image!==null) {
                 accordion.append(`
                 <div class="card">
                   <div class="card-header" id="headingOne">
                     <h2>
                       <button class="btn eventBtn" type="button" data-toggle="collapse" data-target=".event${i}" >
-                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p><a href="https://m.uber.com/ul/?action=setPickup&setPickup&pickup[latitude]=${myLat}8&pickup[longitude]=${myLong}&dropoff[latitude]=${res.events.event[i].latitude}&dropoff[longitude]=${res.events.event[i].longitude}">Get a Ride with Uber</a><br>Latitude:${res.events.event[i].latitude} Longitude:${res.events.event[i].longitude}
+                        ${res.events.event[i].title}<p>${res.events.event[i].start_time}</p>
                       </button>
                     </h2>
                   </div>
               
                   <div class="collapse hide event${i}"  data-parent="#accordionEvent">
                     <div class="card-body">
-                    <img src = ${res.events.event[i].image.thumb.url}>${res.events.event[i].description}
+                    ${extras}
                     </div>
                   </div>
                 </div>
@@ -157,7 +158,7 @@ function grabEvents(parameters) {
               
                   <div class="collapse hide event${i}"  data-parent="#accordionEvent">
                     <div class="card-body">
-                    ${res.events.event[i].description}
+                    ${extras}
                     </div>
                   </div>
                 </div>
@@ -334,9 +335,9 @@ let slider = document.getElementById("distanceSlider");
 let output = document.getElementById("value");
 output.innerHTML = slider.value;
 
-// slider.oninput = function () {
-//     output.innerHTML = this.value;
-// }
+slider.oninput = function () {
+    output.innerHTML = this.value;
+}
 //End Jared's code
 
 
