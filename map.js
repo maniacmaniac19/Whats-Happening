@@ -1,6 +1,7 @@
 var map;
 
 function initMap() {
+    
     var location = {
         lat: 38.7578,
         lng: 8.9806,
@@ -37,5 +38,17 @@ $("#getLocation").on("click", function (event){
   moveToLocation(parseInt(latitude), parseInt(longitude));
 
 });
+
+
+// $("#submitaddress").on("click", function (event){
+
+//     event.preventDefault();
+
+//   let latitude = $("#latitude").val()
+//   let longitude = $("#longitude").val()
+//   moveToLocation(parseInt(latitude), parseInt(longitude));
+
+// });
+
 
 

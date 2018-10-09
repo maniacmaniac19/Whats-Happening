@@ -12,9 +12,16 @@
 </head>
 
 <body>
+        <nav class="navbar navbar-light fixed-top bg-light hidden">
+                <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
+    
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+                    Find an Event
+                </button>
+            </nav>
     <div class="container-fluid">
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -34,17 +41,6 @@
                             <button type="button" id="nextweekBtn">NEXT WEEK</button>
                             <button type="button" id="allBtn">ALL</button>
 
-
-
-                            <!---The user will be able to narrow down event selections by price points and choose from strictly free events-->
-
-                            <!-- Unreliable price return from Eventful -->
-                            <!-- <h4>COST</h4>
-                            <div id="costSlider">
-                                <input type="range" min="0" max="100" value=[0,100] class="slider" id="costRange"></br>
-                                <input type="checkbox" name="free" value="free"> FREE </br>
-                            </div> </br> -->
-
                             <h4>LOCATION</h4>
                             <input type="checkbox" name="location" value="location" id="useMyLoc"> Use My Location </br>
                             Zip Code/City <input type="text" name="city" id="searchArea">
@@ -53,9 +49,10 @@
                             <!-- //!--The user will be able to find events according to distance(0-50miles) by using a distance slider-->
                             <h4>DISTANCE</h4>
                             <div >
-                                <label for="points">Points:</label>
+                                
                                 <input id="distanceSlider" type="range" name="points" id="points" value="50" min="0" max="100"
                                     data-show-value="true">
+                                    <p> <span id="value"></span>miles</p>
                             </div>
 
 
@@ -82,13 +79,7 @@
         </div>
 
         <!-- Nav div -->
-        <nav class="navbar navbar-light bg-light hidden">
-            <a class="navbar-brand pageTitle" href="#">What's Happening?</a>
-
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Find an Event
-            </button>
-        </nav>
+       
         <div class="firstView">
             <h1 class="pageTitle">What's Happening?</h1>
             <div class="row">
@@ -98,7 +89,7 @@
                         <p id="or" class="col-12">OR</p>
                     </div>
                     <!-- <button class = "showFilter" type="button">LATER</button><br />  -->
-                    <button type="button" class=" btn btn-xlarge btn-primary " data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class=" btn btn-xlarge btn-primary " data-toggle="modal" data-target="#formModal">
                         Later
                     </button>
                 </div>
@@ -106,17 +97,17 @@
         </div>
         <!--The user will see a display of the event information along with a map-->
         <div id="eventDump">
-        </div>
-        <div class="row">
-            <div class="col-12">
+        <div>
+            <div class="row col-12">
                 <button class="btn loadMore hidden align-center" id="loadMoreBtn">Load More</button>
             </div>
-
-           
-                <p id="tagLine" class="col-12"> WE KNOW WHAT'S HAPPENING.</p>
-            </div>
+        </div>
+                   
         </div>
     </div>
+    <nav class="navbar fixed-bottom navbar-dark bg-dark">
+            <p class="navbar-brand">WE KNOW WHAT'S HAPPENING.</p>
+          </nav>
 
 
     <!-- Basic jQuery library -->
