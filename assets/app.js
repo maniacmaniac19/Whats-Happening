@@ -202,7 +202,7 @@ const updateParam = function () {
 
             // Now Do Things
             showMenu();
-            $("#exampleModal").modal("hide");
+            $("#formModal").modal("hide");
             myDump.empty();
             grabEvents(myParam);
             searchLocation.val("");
@@ -226,7 +226,7 @@ const updateParam = function () {
 
         // Now Do Things
         showMenu();
-        $("#exampleModal").modal("hide");
+        $("#formModal").modal("hide");
         myDump.empty();
         grabEvents(myParam);
         searchLocation.val("");}
