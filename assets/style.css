@@ -27,7 +27,7 @@ h1{
 }
 
 .firstBtns{
-    margin-top: 20px;
+    margin-top: 90px;
     text-align: center;
     
     
@@ -39,7 +39,7 @@ h1{
 
 .btn-xlarge{
     padding: 40px 60px;
-    font-size: 1.5rem;
+    font-size: 2rem;
 }
 
 .loadMore{
@@ -84,4 +84,7 @@ height: 50px;
 
 #div50{
     height: 50px;
+}
+#openTitle{
+    margin-top: 95px;
 }
