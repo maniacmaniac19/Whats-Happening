@@ -146,8 +146,7 @@ function grabEvents(parameters) {
     
             }
             else{                
-                accordion.append(`<div class="accordion" id="accordionEvent">
-                <div class="card">
+                accordion.append(`<div class="card">
                   <div class="card-header" id="headingOne">
                     <row>
                       <button class="btn eventBtn col-xs-12" type="button" data-toggle="collapse" data-target=".event${i}" >
@@ -347,18 +346,23 @@ $(".nowButton").on('click',function(){getLocation(savePositionNow)});
 //Pressing these changes the date parameter
 $("#todayBtn").on('click',function(){
     myParam.date="Today";
+     let current = document.getElementsByClassName("active");
+     current.className = current.className.replace("active", "");
     // console.log(myParam.date);
 });
 $("#thisweekBtn").on('click',function(){
     myParam.date="This Week";
+    addClass = ".active"
     // console.log(myParam.date);
 });
 $("#nextweekBtn").on('click',function(){
     myParam.date="Next Week";
+    addClass = ".active"
     // console.log(myParam.date);
 });
 $("#allBtn").on('click',function(){
     myParam.date="Future";
+    addClass = ".active"
     // console.log(myParam.date);
 });
 // Updates parameters based on user input
