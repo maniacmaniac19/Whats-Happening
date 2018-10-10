@@ -78,7 +78,7 @@ function eventExtras(eventData){
     // If things exist, then ...
     retStr+=`<div class="col-8">`
     if(eventData.venue_address){
-        retStr+=`${eventData.venue_address}`
+        retStr+=`${eventData.venue_address}<br> ${eventData.city_name}, ${eventData.region_abbr}<br><br>`
     }
     retStr+=`</div><div class="col-4">`
     if(eventData.image){
@@ -86,9 +86,9 @@ function eventExtras(eventData){
     }
     retStr+=`</div></div><div class="row"><div class="col-12">`
     if(eventData.description){
-        retStr+=`${eventData.description}`
+        retStr+=`${eventData.description}<a href=${eventData.url}>See more info...</a>`
     }else{
-        retStr+="No Description Provided."
+        retStr+=`No Description Provided.<a href=${eventData.url}>See more info...</a>`
     }
     retStr+=`</div></div><div class="row"><div class="col-6">`
     if(eventData.categories){
@@ -346,25 +346,38 @@ $(".nowButton").on('click',function(){getLocation(savePositionNow)});
 //Pressing these changes the date parameter
 $("#todayBtn").on('click',function(){
     myParam.date="Today";
-     let current = document.getElementsByClassName("active");
-     current.className = current.className.replace("active", "");
+    document.getElementById("todayBtn").style.backgroundColor = "dodgerblue"
+    document.getElementById("thisweekBtn").style.backgroundColor = ""
+    document.getElementById("nextweekBtn").style.backgroundColor = ""
+    document.getElementById("allBtn").style.backgroundColor = ""
     // console.log(myParam.date);
 });
 $("#thisweekBtn").on('click',function(){
     myParam.date="This Week";
-    addClass = ".active"
+    document.getElementById("todayBtn").style.backgroundColor = ""
+    document.getElementById("thisweekBtn").style.backgroundColor = "dodgerblue"
+    document.getElementById("nextweekBtn").style.backgroundColor = ""
+    document.getElementById("allBtn").style.backgroundColor = ""
     // console.log(myParam.date);
 });
 $("#nextweekBtn").on('click',function(){
     myParam.date="Next Week";
-    addClass = ".active"
+    document.getElementById("todayBtn").style.backgroundColor = ""
+    document.getElementById("thisweekBtn").style.backgroundColor = ""
+    document.getElementById("nextweekBtn").style.backgroundColor = "dodgerblue"
+    document.getElementById("allBtn").style.backgroundColor = ""
     // console.log(myParam.date);
 });
 $("#allBtn").on('click',function(){
     myParam.date="Future";
-    addClass = ".active"
+    document.getElementById("todayBtn").style.backgroundColor = ""
+    document.getElementById("thisweekBtn").style.backgroundColor = ""
+    document.getElementById("nextweekBtn").style.backgroundColor = ""
+    document.getElementById("allBtn").style.backgroundColor = "dodgerblue"
+    
     // console.log(myParam.date);
 });
+
 // Updates parameters based on user input
 $("#findEventBtn").on('click',updateParam);
 
