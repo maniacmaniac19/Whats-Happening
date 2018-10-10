@@ -13,6 +13,14 @@ h1{
     margin-top: 15px;
 }
 
+button:active{
+    background: dodgerblue;
+}
+
+a{
+    color: red;
+}
+
 .hidden{
     display: none;
 }
@@ -29,8 +37,7 @@ h1{
 .firstBtns{
     margin-top: 20px;
     text-align: center;
-    
-    
+ 
 }
 
 .active{
@@ -46,11 +53,14 @@ h1{
     text-align: center;
 }
 
-.slider-wrapper {
-    display: inline-block;
-    width: 20px;
-    height: 150px;
-    padding: 0;
+.eventButton{
+    margin: 0 auto;
+    text-align: center;
+}
+
+.card{
+    margin: 0 auto;
+    float: none;
 }
 
 #div50{
@@ -80,8 +90,4 @@ height: 50px;
     -webkit-column-count: 2; /* Chrome, Safari, Opera */
     -moz-column-count: 2; /* Firefox */
     column-count: 2;
-}
-
-#div50{
-    height: 50px;
 }
